@@ -1,0 +1,26 @@
+services:
+  spring-start:
+    build: ./
+    depends_on:
+      - pgdb
+    ports:
+      - 8080:8080
+    container_name: spring_server
+
+
+  pgdb:
+    image: postgres:15
+    restart: always
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_DB=furniture
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    container_name: pgdb
+    volumes:
+      - pgdbdata:/var/lib/postgresql/data
+
+volumes:
+  pgdbdata: null
+  server: null
