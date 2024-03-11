@@ -1,11 +1,11 @@
-package com.example.Practice.Model;
+package com.example.Practice.Dto;
 
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class Product
+public class ProductDto
 {
     private Long id;
     private String title;
