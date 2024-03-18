@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ProductDto
+public class ApiProductDto
 {
     private Long id;
     private String title;

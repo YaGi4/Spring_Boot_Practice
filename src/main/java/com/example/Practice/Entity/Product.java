@@ -8,8 +8,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
 @Table(name = "products", uniqueConstraints = { @UniqueConstraint(columnNames = {"original_id"})})
 public class Product {
     @Id
@@ -46,6 +45,9 @@ public class Product {
 
     @Column(name = "thumbnail")
     private String thumbnail;
+
+    @Column(name = "status")
+    private String status;
 
     @OneToMany(mappedBy = "productId", fetch = FetchType.LAZY)
     private List<Images> images;

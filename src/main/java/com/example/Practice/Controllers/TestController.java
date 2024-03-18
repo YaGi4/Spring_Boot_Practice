@@ -1,22 +1,19 @@
 package com.example.Practice.Controllers;
 
-import com.example.Practice.Dto.ProductDto;
+import com.example.Practice.Dto.TransactionReportDto;
+import com.example.Practice.Service.SaveDataFromApiInDatabase;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.Practice.Service.GetDataFromApi;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class TestController {
 
-    private final GetDataFromApi getDataFromApi;
+    private final SaveDataFromApiInDatabase saveDataInDatabase;
     @GetMapping("/getData")
-    public String getInfo() throws JsonProcessingException {
-        Integer flag = getDataFromApi.getData();
-        return "Success";
+    public TransactionReportDto getInfo() throws JsonProcessingException {
+        return saveDataInDatabase.saveDataInDatabase();
     }
 }
