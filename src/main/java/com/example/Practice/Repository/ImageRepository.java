@@ -1,7 +1,6 @@
 package com.example.Practice.Repository;
 
-import com.example.Practice.Entity.Images;
-import com.example.Practice.Entity.Product;
+import com.example.Practice.Entity.Image;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -9,12 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ImageRepository extends JpaRepository<Images, Long> {
+public interface ImageRepository extends JpaRepository<Image, Long> {
     @Query(value = "SELECT * FROM images", nativeQuery = true)
-    List<Images> getAll();
+    List<Image> getAll();
 
     @Query(value = "SELECT * FROM images WHERE original_id = :id", nativeQuery = true)
-    List<Images> findAllByProductId(Long id);
+    List<Image> findAllByProductId(Long id);
 
     @Transactional
     @Modifying(clearAutomatically = true)

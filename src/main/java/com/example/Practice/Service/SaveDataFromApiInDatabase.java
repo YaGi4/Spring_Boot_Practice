@@ -2,7 +2,7 @@ package com.example.Practice.Service;
 
 import com.example.Practice.Dto.ApiProductDto;
 import com.example.Practice.Dto.TransactionReportDto;
-import com.example.Practice.Entity.Images;
+import com.example.Practice.Entity.Image;
 import com.example.Practice.Entity.Product;
 import com.example.Practice.Repository.ImageRepository;
 import com.example.Practice.Repository.ProductRepository;
@@ -24,7 +24,7 @@ public class SaveDataFromApiInDatabase {
 
     public void addImageToProduct(TransactionReportDto report, Long productId, List<String> newImages)
     {
-        List<Images> oldImagesEntity = imageRepository.findAllByProductId(productId);
+        List<Image> oldImagesEntity = imageRepository.findAllByProductId(productId);
         List<String> oldImages = new ArrayList<String>();
         for(int i = 0; i < oldImagesEntity.size(); i++){oldImages.add(oldImagesEntity.get(i).getImageUrl());}
         List<String> general = new ArrayList<String>(oldImages);

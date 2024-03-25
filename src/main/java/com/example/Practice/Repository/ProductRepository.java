@@ -2,6 +2,7 @@ package com.example.Practice.Repository;
 
 import com.example.Practice.Entity.Product;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "SELECT * FROM products", nativeQuery = true)
-    List<Product> getAll();
+    List<Product> getAll(PageRequest pageRequest);
     @Query(value = "SELECT * FROM products WHERE original_id = :id", nativeQuery = true)
     Product getProductByOriginalId(Long id);
 
