@@ -1,6 +1,5 @@
 package com.example.Practice.Controllers;
 
-import com.example.Practice.Dto.TransactionReportDto;
 import com.example.Practice.Service.SaveDataFromApiInDatabase;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +12,7 @@ public class TestController {
 
     private final SaveDataFromApiInDatabase saveDataInDatabase;
     @GetMapping("/getData")
-    public TransactionReportDto getInfo() throws JsonProcessingException {
-        return saveDataInDatabase.saveDataInDatabase();
+    public void getInfo() throws JsonProcessingException {
+        saveDataInDatabase.saveDataInDatabase();
     }
 }

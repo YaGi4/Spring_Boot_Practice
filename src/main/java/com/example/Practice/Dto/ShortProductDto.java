@@ -9,17 +9,13 @@ import java.util.List;
 @Data
 public class ShortProductDto
 {
+    private Long id;
     private String title = null;
     private Float price = null;
     private Float discountPercentage = null;
     private Float rating = null;
     @JsonProperty("imageList")
-    private List<ImageDto> imageDtoList = new ArrayList<>();
-
-    public void addImage(ImageDto image)
-    {
-        imageDtoList.add(image);
-    }
+    private List<ImageDto> images = new ArrayList<>();
 }
 
 

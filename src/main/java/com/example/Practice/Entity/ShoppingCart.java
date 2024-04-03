@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "basket")
-public class Basket {
+@Table(name = "shopping_cart")
+public class ShoppingCart {
 
     @Id
     @Column(name = "id")

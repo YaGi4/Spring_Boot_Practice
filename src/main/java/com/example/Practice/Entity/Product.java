@@ -2,6 +2,7 @@ package com.example.Practice.Entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Entity
 @Data
+@AllArgsConstructor
 @Table(name = "products", uniqueConstraints = { @UniqueConstraint(columnNames = {"original_id"})})
 public class Product {
     @Id
@@ -50,7 +52,11 @@ public class Product {
     private String status;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "productId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "productId", fetch = FetchType.LAZY, cascade=CascadeType.MERGE)
     @JsonManagedReference
     private List<Image> images;
+
+    public Product() {
+
+    }
 }

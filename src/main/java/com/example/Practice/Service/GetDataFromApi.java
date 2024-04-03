@@ -13,12 +13,10 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class GetDataFromApi {
+    private final ObjectMapper objectMapper;
+    private final RestTemplate restTemplate = new RestTemplate();
 
     public List<ApiProductDto> getDataFromApi() throws JsonProcessingException {
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        RestTemplate restTemplate = new RestTemplate();
-
         String jsonString = restTemplate.getForObject("https://dummyjson.com/products", String.class);
         JsonModel jsonModel = objectMapper.readValue(jsonString, new TypeReference<>() {});
         return jsonModel.getProducts();

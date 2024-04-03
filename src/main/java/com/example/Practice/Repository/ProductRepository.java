@@ -12,8 +12,13 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "SELECT * FROM products", nativeQuery = true)
     List<Product> getAll(PageRequest pageRequest);
+    @Query(value = "SELECT * FROM products", nativeQuery = true)
+    List<Product> getAll();
     @Query(value = "SELECT * FROM products WHERE original_id = :id", nativeQuery = true)
     Product getProductByOriginalId(Long id);
+
+    @Query(value = "SELECT * FROM products WHERE id = :id", nativeQuery = true)
+    Product getProductById(Long id);
 
     @Transactional
     @Modifying(clearAutomatically = true)
@@ -41,7 +46,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query(value = "UPDATE products SET status = 'svailable' WHERE original_id = :id", nativeQuery = true)
+    @Query(value = "UPDATE products SET status = 'available' WHERE original_id = :id", nativeQuery = true)
     void setAvaliableByOriginalId(Long id);
 
 }
