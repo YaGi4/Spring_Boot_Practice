@@ -16,8 +16,7 @@ public class ProductController {
     public final GetProduct getProduct;
 
     @GetMapping("/{id}")
-    public ExtendedProductDto getProduct(@PathVariable Long id)
-    {
+    public ExtendedProductDto getProduct(@PathVariable Long id) {
         return getProduct.getProduct(id);
     }
 }

@@ -37,8 +37,8 @@ public class SaveDataFromApiInDatabase {
         else return true;
     }
 
-    public Product findEntityProductByOriginalId(Long id, List<Product> products){
-        for(Product product : products){
+    public Product findEntityProductByOriginalId(Long id, List<Product> products) {
+        for(Product product : products) {
             if(product.getOriginalId().equals(id)){
                 return product;
             }
@@ -82,7 +82,7 @@ public class SaveDataFromApiInDatabase {
         List<Image> listOfImagesToAdd = new ArrayList<>();
         List<Image> allImages = new ArrayList<>();
 
-        for(ApiProductDto productDto : productsDto){
+        for(ApiProductDto productDto : productsDto) {
             Product entityProduct = findEntityProductByOriginalId(productDto.getId(), productsEntityList);
             Product product = new Product(null, productDto.getId(), productDto.getTitle(),
                     productDto.getDescription(), productDto.getPrice(), productDto.getDiscountPercentage(),

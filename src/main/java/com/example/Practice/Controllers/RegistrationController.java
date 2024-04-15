@@ -2,6 +2,7 @@ package com.example.Practice.Controllers;
 
 import com.example.Practice.Dto.RegistrationRequestDto;
 import com.example.Practice.Service.RegisterNewUserAccount;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +15,7 @@ public class RegistrationController {
     private final RegisterNewUserAccount registerNewUserAccount;
 
     @PostMapping("/registration")
-    public void registration(@RequestBody RegistrationRequestDto registrationRequestDto){
+    public void registration(@RequestBody @Valid RegistrationRequestDto registrationRequestDto){
         registerNewUserAccount.registration(registrationRequestDto);
     }
 }

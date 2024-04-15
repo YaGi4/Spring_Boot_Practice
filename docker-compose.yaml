@@ -21,6 +21,15 @@ services:
     volumes:
       - pgdbdata:/var/lib/postgresql/data
 
+  redis:
+    image: redis:7.2.4
+    restart: always
+    ports:
+      - 6333:6379
+    environment:
+      - REDIS_PASSWORD=redispassword
+      - REDIS_PORT=6379
+      - REDIS_DATABASES=4
 volumes:
   pgdbdata: null
   server: null

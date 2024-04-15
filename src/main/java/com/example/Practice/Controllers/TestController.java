@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     private final SaveDataFromApiInDatabase saveDataInDatabase;
+
     @GetMapping("/getData")
     public void getInfo() throws JsonProcessingException {
         saveDataInDatabase.saveDataInDatabase();

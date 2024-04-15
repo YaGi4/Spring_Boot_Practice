@@ -22,3 +22,4 @@ public class GetDataFromApi {
         return jsonModel.getProducts();
     }
 }
+// FEIGNclient

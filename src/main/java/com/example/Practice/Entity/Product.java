@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "products", uniqueConstraints = { @UniqueConstraint(columnNames = {"original_id"})})
 public class Product {
     @Id
@@ -56,7 +58,4 @@ public class Product {
     @JsonManagedReference
     private List<Image> images;
 
-    public Product() {
-
-    }
 }
