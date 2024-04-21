@@ -1,33 +1,23 @@
 package com.example.Practice.Service;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @AllArgsConstructor
-@NoArgsConstructor
 public class Redis {
 
-    private final JedisPool jedisPool = new JedisPool("127.0.0.1", 6333);
-    private Jedis jedis = jedisPool.getResource();
+    private RedisTemplate<String, String> template;
 
-    public List<String> getRefreshTokenByLogin(String login) {
-        return jedis.lrange(login, 0, -1);
-    }
-
-    public void deleteOldTokenAndSaveNewToken(String oldRefreshToken, String newRefreshToken, String login) {
-            jedis.lrem(login, 0, oldRefreshToken);
-            jedis.lpush(login, newRefreshToken);
-            jedis.expire(login, 10800);
+    public String getRefreshTokenByLogin(String login) {
+        return template.boundValueOps(login).get();
     }
 
     public void setRefreshTokenByLogin (String login, String refreshToken) {
-            jedis.lpush(login, refreshToken);
-            jedis.expire(login, 10800);
+        template.opsForValue().set(login, refreshToken);
+        template.expire(login, 3, TimeUnit.HOURS);
     }
 }

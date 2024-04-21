@@ -34,7 +34,7 @@ public class RegisterNewUserAccount {
         user.setProfileImageUrl(registrationRequestDto.getProfileImageUrl());
         user.setPassword(passwordEncoder.encode(registrationRequestDto.getPassword()));
         user.setDateOfCreation(new Timestamp(System.currentTimeMillis()));
-        user.setPrivilegeLevel("user");
+        user.setPrivilegeLevel("USER");
         user.setLocked(false);
 
         userRepository.save(user);

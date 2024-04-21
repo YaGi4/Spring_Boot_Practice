@@ -1,6 +1,6 @@
 package com.example.Practice.Filter;
 
-import com.example.Practice.Model.JwtUtils;
+import com.example.Practice.Model.Role;
 import com.example.Practice.Service.JwtAuthentication;
 import com.example.Practice.Service.JwtProvider;
 import io.jsonwebtoken.Claims;
@@ -30,7 +30,11 @@ public class JwtFilter extends GenericFilterBean {
         final String token = getTokenFromRequest((HttpServletRequest) servletRequest);
         if (token != null && jwtProvider.validateAccessToken(token)) {
             final Claims claims = jwtProvider.getAccessClaims(token);
-            final JwtAuthentication jwtAuthentication = JwtUtils.generate(claims);
+            final JwtAuthentication jwtAuthentication = new JwtAuthentication();
+            jwtAuthentication.setFirstName(claims.get("firstName", String.class));
+            jwtAuthentication.setId(claims.get("id", Long.class));
+            jwtAuthentication.setLogin(claims.getSubject());
+            jwtAuthentication.setAuthorities(new Role("ROLE_" + claims.get("role", String.class)));
             jwtAuthentication.setAuthenticated(true);
             SecurityContextHolder.getContext().setAuthentication(jwtAuthentication);
         }

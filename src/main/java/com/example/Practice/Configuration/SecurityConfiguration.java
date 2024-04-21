@@ -34,9 +34,8 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
-                        .requestMatchers("/registration").permitAll()
-                        .requestMatchers("/product/**").permitAll()
-                        .requestMatchers("/authentication/**").permitAll()
+                        .requestMatchers("/registration", "/product/**", "/authentication/**").permitAll()
+                        .requestMatchers("/shoppingCart/**").authenticated()
                         .requestMatchers("/getData").hasRole("ADMIN")
                 );
 

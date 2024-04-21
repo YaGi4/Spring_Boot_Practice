@@ -8,10 +8,9 @@ import com.example.Practice.Exception.WrongPasswordException;
 import com.example.Practice.Repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -37,9 +36,7 @@ public class Authentication {
             }
             String accessToken = jwtProvider.generateAccessToken(user);
             String refreshToken = jwtProvider.generateRefreshToken(user);
-
             redis.setRefreshTokenByLogin(user.getLogin(), refreshToken);
-
             return new JwtResponseDto(accessToken, refreshToken);
         }
     }
@@ -55,16 +52,14 @@ public class Authentication {
                     throw new TokensException("User not found");
                 }
                 else {
-                    List<String> map = redis.getRefreshTokenByLogin(user.getLogin());
-                    if(!map.isEmpty() && map.contains(oldRefreshToken)) {
-                        if (user.getLocked()) {
-                            throw new TokensException("User is locked");
-                        }
+                    if (user.getLocked()) {
+                        throw new TokensException("User is locked");
+                    }
+                    String refreshTokenByLogin = redis.getRefreshTokenByLogin(user.getLogin());
+                    if(refreshTokenByLogin != null && refreshTokenByLogin.equals(oldRefreshToken)) {
                         String newAccessToken = jwtProvider.generateAccessToken(user);
                         String newRefreshToken = jwtProvider.generateRefreshToken(user);
-
-                        redis.deleteOldTokenAndSaveNewToken(oldRefreshToken, newRefreshToken, user.getLogin());
-
+                        redis.setRefreshTokenByLogin(user.getLogin(), newRefreshToken);
                         return new JwtResponseDto(newAccessToken, newRefreshToken);
                     }
                     else
@@ -72,5 +67,9 @@ public class Authentication {
                 }
         }
         throw new TokensException("Token not valid");
+    }
+
+    public JwtAuthentication getAuthInfo() {
+        return (JwtAuthentication) SecurityContextHolder.getContext().getAuthentication();
     }
 }

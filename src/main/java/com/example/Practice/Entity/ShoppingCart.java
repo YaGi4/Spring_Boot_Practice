@@ -1,11 +1,16 @@
 package com.example.Practice.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
 @Table(name = "shopping_cart")
+@AllArgsConstructor
+@NoArgsConstructor
 public class ShoppingCart {
 
     @Id
@@ -13,18 +18,19 @@ public class ShoppingCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", insertable=false, updatable=false)
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.MERGE)
+    @JoinColumn(name = "user_id")
     private User userId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", insertable=false, updatable=false)
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.MERGE)
+    @JoinColumn(name = "product_id")
     private Product productId;
 
-    @Column(name = "amount")
-    private Integer amount;
+    @Column(name = "quantity")
+    private Integer quantity;
 
-    @Column(name = "status")
-    private String status;
-
+    @Column(name = "description")
+    private String description;
 }

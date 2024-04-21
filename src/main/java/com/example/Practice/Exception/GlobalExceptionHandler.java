@@ -5,6 +5,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.SignatureException;
+import jakarta.validation.UnexpectedTypeException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -44,6 +45,19 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorStatusDto> handleValidationException(MethodArgumentNotValidException exception) {
+        ErrorStatusDto errorStatusDto = new ErrorStatusDto();
+
+        errorStatusDto.setTimeStamp(new Date());
+        errorStatusDto.setStatusCode(HttpStatus.BAD_REQUEST);
+        errorStatusDto.setErrorCode(HttpStatus.BAD_REQUEST.value());
+        errorStatusDto.setAndroidErrorCode(1002);
+        errorStatusDto.setMessage(exception.getMessage());
+
+        return new ResponseEntity<ErrorStatusDto>(errorStatusDto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UnexpectedTypeException.class)
+    public ResponseEntity<ErrorStatusDto> handleUnexpectedTypeException(UnexpectedTypeException exception) {
         ErrorStatusDto errorStatusDto = new ErrorStatusDto();
 
         errorStatusDto.setTimeStamp(new Date());

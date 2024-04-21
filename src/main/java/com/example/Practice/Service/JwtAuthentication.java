@@ -2,22 +2,25 @@ package com.example.Practice.Service;
 
 import com.example.Practice.Model.Role;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
+@NoArgsConstructor
 public class JwtAuthentication implements Authentication {
 
     private boolean authenticated;
-    private String userName;
-    private Set<Role> roles = new HashSet<>();
+    private Long id;
+    private String firstName;
+    private String login;
+    private Collection<Role> role = new ArrayList<>();
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() { return roles; }
+    public Collection<? extends GrantedAuthority> getAuthorities() { return role; }
 
     @Override
     public Object getCredentials() {
@@ -31,7 +34,7 @@ public class JwtAuthentication implements Authentication {
 
     @Override
     public Object getPrincipal() {
-        return userName;
+        return firstName;
     }
 
     @Override
@@ -45,7 +48,7 @@ public class JwtAuthentication implements Authentication {
     }
 
     @Override
-    public String getName() { return userName; }
+    public String getName() { return firstName; }
 
-    public void setAuthorities(Role role) { this.roles.add(role); }
+    public void setAuthorities(Role role) { this.role.add(role); }
 }

@@ -1,18 +1,17 @@
 package com.example.Practice.Model;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 @RequiredArgsConstructor
-public enum Role implements GrantedAuthority {
+@AllArgsConstructor
+public class Role implements GrantedAuthority {
 
-    ADMIN("ADMIN"),
-    USER("USER");
-
-    private final String authority;
+    private String authority;
 
     @Override
     public String getAuthority() {
-        return name();
+        return authority;
     }
 }
