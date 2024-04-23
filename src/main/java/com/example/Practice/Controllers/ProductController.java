@@ -30,5 +30,5 @@ public class ProductController {
             @RequestParam(value = "limit", defaultValue = "10") @Min(1) @Max(100) Integer limit
     ) {
         return getallProducts.getProducts(offset, limit);
-    }
+    } 
 }
