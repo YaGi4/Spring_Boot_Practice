@@ -7,10 +7,11 @@ import lombok.*;
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "images")
 public class Image {
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -22,8 +23,4 @@ public class Image {
 
     @Column(name = "image_url")
     private String imageUrl;
-
-    public Image() {
-
-    }
 }

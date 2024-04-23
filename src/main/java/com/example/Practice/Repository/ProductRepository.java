@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    @Query(value = "SELECT * FROM products where id", nativeQuery = true)
+    @Query(value = "SELECT * FROM products", nativeQuery = true)
     List<Product> getAll(PageRequest pageRequest);
     @Query(value = "SELECT * FROM products", nativeQuery = true)
     List<Product> getAll();

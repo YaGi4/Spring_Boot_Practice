@@ -1,7 +1,6 @@
 package com.example.Practice.Service;
 
 import com.example.Practice.Entity.User;
-import com.example.Practice.Repository.UserRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -24,16 +23,13 @@ public class JwtProvider {
 
     private final SecretKey jwtAccessSecret;
     private final SecretKey jwtRefreshSecret;
-    private final UserRepository userRepository;
 
     public JwtProvider(
             @Value("${jwt.secret.access}") String jwtAccessSecret,
-            @Value("${jwt.secret.refresh}") String jwtRefreshSecret,
-            UserRepository userRepository
+            @Value("${jwt.secret.refresh}") String jwtRefreshSecret
     ) {
         this.jwtAccessSecret = Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtAccessSecret));
         this.jwtRefreshSecret = Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtRefreshSecret));
-        this.userRepository = userRepository;
     }
 
 

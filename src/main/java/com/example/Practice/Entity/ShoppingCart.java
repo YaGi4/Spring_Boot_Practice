@@ -14,7 +14,7 @@ import lombok.ToString;
 public class ShoppingCart {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
@@ -28,9 +28,9 @@ public class ShoppingCart {
     @JoinColumn(name = "product_id")
     private Product productId;
 
-    @Column(name = "quantity")
+    @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 100)
     private String description;
 }

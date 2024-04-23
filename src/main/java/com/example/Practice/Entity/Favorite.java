@@ -9,15 +9,15 @@ import lombok.Data;
 public class Favorite {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", insertable=false, updatable=false)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User userId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", insertable=false, updatable=false)
+    @JoinColumn(name = "product_id", insertable = false, updatable = false)
     private Product productId;
 }
