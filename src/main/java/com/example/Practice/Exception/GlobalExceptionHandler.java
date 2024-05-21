@@ -121,19 +121,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorStatusDto, HttpStatus.UNAUTHORIZED);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorStatusDto> handleExceptionException(Exception exception) {
-        ErrorStatusDto errorStatusDto = new ErrorStatusDto();
-
-        errorStatusDto.setTimeStamp(new Date());
-        errorStatusDto.setStatusCode(HttpStatus.UNAUTHORIZED);
-        errorStatusDto.setErrorCode(HttpStatus.UNAUTHORIZED.value());
-        errorStatusDto.setAndroidErrorCode(1003);
-        errorStatusDto.setMessage(exception.getMessage());
-
-        return new ResponseEntity<>(errorStatusDto, HttpStatus.UNAUTHORIZED);
-    }
-
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ErrorStatusDto> handleUsernameNotFoundException(UserNotFoundException exception) {
         ErrorStatusDto errorStatusDto = new ErrorStatusDto();
