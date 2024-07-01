@@ -74,7 +74,7 @@ public class SaveDataFromApiInDatabase {
 
     public void saveDataInDatabase() throws JsonProcessingException {
         List<ApiProductDto> productsDto = getDataFromApi.getDataFromApi();
-        List<Product> productsEntityList =  productRepository.getAll();
+        List<Product> productsEntityList =  productRepository.getAllProducts();
         List<Image> ImagesEntity = imageRepository.findAll();
 
         List<Product> listOfProductsToAdd = new ArrayList<>();

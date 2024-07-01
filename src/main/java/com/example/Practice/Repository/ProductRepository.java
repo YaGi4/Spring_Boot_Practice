@@ -12,8 +12,10 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "SELECT * FROM products", nativeQuery = true)
     List<Product> getAll(PageRequest pageRequest);
+
     @Query(value = "SELECT * FROM products", nativeQuery = true)
-    List<Product> getAll();
+    List<Product> getAllProducts();
+
     @Query(value = "SELECT * FROM products WHERE original_id = :id", nativeQuery = true)
     Product getProductByOriginalId(Long id);
 

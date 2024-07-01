@@ -39,6 +39,7 @@ public class SecurityConfiguration {
         configuration.addAllowedHeader("content-type");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/authentication/**", configuration);
+        source.registerCorsConfiguration("/product/**", configuration);
         return source;
     }
 
@@ -54,7 +55,8 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
-                        .requestMatchers("/registration", "/product/**", "/authentication/**").permitAll()
+                        .requestMatchers("/registration", "/product/**", "/authentication/**", "/v3/**",
+                                "/swagger-ui/**").permitAll()
                         .requestMatchers("/shoppingCart/**").authenticated()
                         .requestMatchers("/getData").hasRole("ADMIN")
                 );
