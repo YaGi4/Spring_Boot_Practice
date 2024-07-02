@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "telegram.bot.token",
+      "type": "java.lang.String",
+      "description": "Description for telegram.bot.token."
+    },
+    {
+      "name": "telegram.bot.admin-chat-id",
+      "type": "java.lang.String",
+      "description": "Description for telegram.bot.admin-chat-id."
+    }
+  ] }
