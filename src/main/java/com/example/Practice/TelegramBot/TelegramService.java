@@ -1,5 +1,6 @@
 package com.example.Practice.TelegramBot;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
 import org.telegram.telegrambots.longpolling.BotSession;
@@ -17,16 +18,22 @@ public class TelegramService implements SpringLongPollingBot, LongPollingSingleT
 
     private final TelegramClient telegramClient;
     private final TelegramBotLogicService botLogicService;
+    private final String botToken;
+    private final Long adminChatId;
 
 
-    public TelegramService(TelegramBotLogicService botLogicService) {
+    public TelegramService(TelegramBotLogicService botLogicService,
+                           @Value("${telegram.bot.token}") String botToken,
+                           @Value("${telegram.bot.admin-chat-id}") Long adminChatId) {
         this.botLogicService = botLogicService;
+        this.botToken = botToken;
+        this.adminChatId = adminChatId;
         telegramClient = new OkHttpTelegramClient(getBotToken());
     }
 
     @Override
     public String getBotToken() {
-        return "myBotToken";                   // <---- Bot token
+        return botToken;
     }
 
     @Override
@@ -62,7 +69,7 @@ public class TelegramService implements SpringLongPollingBot, LongPollingSingleT
     public void sendMessage(String text) {
         SendMessage message = SendMessage
                 .builder()
-                .chatId(735345384L)
+                .chatId(adminChatId)
                 .text(text)
                 .build();
         try {

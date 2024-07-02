@@ -6,6 +6,7 @@ import com.example.Practice.Exception.ProductNotFoundException;
 import com.example.Practice.Repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +15,7 @@ public class GetProduct {
     private final ProductRepository productRepository;
     private ModelMapper mapper = new ModelMapper();
 
+    @Cacheable(value = "productCache")
     public ExtendedProductDto getProduct(Long id) {
         Product productEntity = productRepository.getProductById(id);
         if(productEntity == null){
