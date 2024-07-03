@@ -18,8 +18,9 @@ import java.sql.Timestamp;
 public class RegisterNewUserAccount {
 
     private final PasswordEncoder passwordEncoder;
+    private final SaveUserAndCreateEvent saveUserAndCreateEvent;
     private final UserRepository userRepository;
-    public void registration(@Valid RegistrationRequestDto registrationRequestDto) {
+    public void register(@Valid RegistrationRequestDto registrationRequestDto) {
         if(userRepository.getUserByPhone(registrationRequestDto.getPhone()) != null) {
             throw new UserAuthorizationException("A user with this phone number already exists");
         } else if (userRepository.getUserByLogin(registrationRequestDto.getLogin()) != null) {
@@ -37,6 +38,6 @@ public class RegisterNewUserAccount {
         user.setPrivilegeLevel("USER");
         user.setLocked(false);
 
-        userRepository.save(user);
+        saveUserAndCreateEvent.saveUserAndEvent(user);
     }
 }

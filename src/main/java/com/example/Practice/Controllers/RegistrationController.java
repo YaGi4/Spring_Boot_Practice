@@ -16,6 +16,6 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public void registration(@RequestBody @Valid RegistrationRequestDto registrationRequestDto){
-        registerNewUserAccount.registration(registrationRequestDto);
+        registerNewUserAccount.register(registrationRequestDto);
     }
 }

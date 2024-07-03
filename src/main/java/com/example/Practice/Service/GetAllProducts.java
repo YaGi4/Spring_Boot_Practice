@@ -14,7 +14,6 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class GetAllProducts {
-
     private final ProductRepository productRepository;
     private final ModelMapper mapper = new ModelMapper();
     public List<ShortProductDto> getProducts(Integer offset, Integer limit){
