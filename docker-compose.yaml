@@ -50,11 +50,6 @@ services:
         condition: service_healthy
     ports:
       - 29092:29092
-    healthcheck:
-      test: [ "CMD", "nc", "-vz", "localhost", "9092" ]
-      interval: 10s
-      timeout: 3s
-      retries: 3
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181

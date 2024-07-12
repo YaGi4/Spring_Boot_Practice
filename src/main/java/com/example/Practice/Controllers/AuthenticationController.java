@@ -20,7 +20,7 @@ public class AuthenticationController {
     private final TelegramService telegramService;
 
     @PostMapping("/login")
-    public JwtResponseDto authentication(@RequestBody AuthorizationRequestDto authorizationRequestDto) {
+    public JwtResponseDto authenticate(@RequestBody AuthorizationRequestDto authorizationRequestDto) {
         telegramService.sendMessage(authorizationRequestDto.getLogin() + " try to authenticate");
         return authentication.login(authorizationRequestDto.getLogin(), authorizationRequestDto.getPassword());
     }
